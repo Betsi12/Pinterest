@@ -151,7 +151,7 @@ background-color: whitesmoke;
     background-color: whitesmoke;
 }
 
-#sara{
+#myname{
     background-color: transparent;
     border-style: none;
     padding-left: 42px;
@@ -172,13 +172,13 @@ background-color: whitesmoke;
     cursor:pointer;
 }
 
-#sara:hover{
+#my-name:hover{
     box-sizing: border-box;
     border-style: none;
     background-color: whitesmoke;
 }
 
-#sarin{
+#id-name{
     position: absolute;
     background-color: rgba(148, 137, 137, 0.726);
     border-style: none;
@@ -213,7 +213,7 @@ background-color: whitesmoke;
     border-radius: 50%;
 }
 
-#shar:hover{
+#comment:hover{
     box-sizing: border-box;
     border-style: none;
     background-color: whitesmoke;

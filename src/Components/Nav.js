@@ -18,9 +18,9 @@ class Navbar extends Component{
           <div id="buttons" className="buttons">
           <button id="inicio">Inicio</button>
           <button id="siguiendo">Siguiendo</button>
-          <button id="sarin">S</button>
-          <button id="sara">Sara</button>
-          <i id="shar" className='fas fa-comment-dots'></i>
+          <button id="id-name">IdName</button>
+          <button id="my-name">MyName</button>
+          <i id="comment" className='fas fa-comment-dots'></i>
           <i id="bell" className='far fa-bell'></i>
           <i id="points" className='fas fa-ellipsis-h'></i>
           </div>
