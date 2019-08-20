@@ -1,27 +1,60 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+import Nav from './Components/Nav';
+import Modal from './Components/Modal';
+import './Components/Modal.css'
+import './Components/Api.css';
+const apiKey= "8540a06957bba7edb8ec581240178641a0fe9f10d8bd30329a42272a3de373ab";
+const endpoint= "http://api.unsplash.com/search/photos";
+
+
+export  default class App extends Component {
+  constructor(){
+    super()
+    this.query= "";
+    this.trackQueryValue=this.trackQueryValue.bind(this);
+    this.search=this.search.bind(this);
+  
+    this.state={
+      images:[]
+    }
+  }
+  
+  
+  search(){
+    fetch (`${endpoint}?query=${this.query}&client_id=${apiKey}`)
+    .then(response=>{
+      return response.json()
+    })
+    .then(jsonResponse=>{
+      this.setState({
+        images:jsonResponse.results
+      })
+    })
+
+  }
+
+  trackQueryValue(ev){
+    this.query=ev.target.value;
+  }
+  
+  images(){
+    return this.state.images.map(image=>{
+      return <img src={image.urls.thumb}/>
+    })
+  }
+  render(){
+    return(
+      <div>
+          <input type="text" onChange={this.trackQueryValue}/>
+            <button onClick={this.search}>Buscar</button>
+            <div>
+              {this.images()}
+            </div>
       </div>
     );
   }
 }
-export default App;
+
+  
+

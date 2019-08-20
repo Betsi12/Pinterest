@@ -10,7 +10,7 @@ class Navbar extends Component{
           <button id='content-icon'><i className='fab fa-pinterest'></i></button>
           <div id='cap-input'>
           <div id='all-input'>
-          <img id="lupa" src="/Imagenes/buscador-musical.png"></img>
+          <img id="lupa" src="/Images/buscador-lupa.png"></img>
           <input id='buscar' ref={this.busquedaRef} type="search" placeholder="Buscar" ></input>
           </div>
           </div>
