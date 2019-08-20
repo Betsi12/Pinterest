@@ -1,60 +1,111 @@
 import React, { Component } from 'react';
+import './App.css';
+import Cards from './Components/Cards/Cards';
+import Modal from './Components/Modal/Modal';
+import Navbar from './Components/Navbar/Navbar';
+import './Components/Cards/Cards.css';
+import InfiniteScroll from 'react-infinite-scroll-component'
 
-import Nav from './Components/Nav';
-import Modal from './Components/Modal';
-import './Components/Modal.css'
-import './Components/Api.css';
-const apiKey= "8540a06957bba7edb8ec581240178641a0fe9f10d8bd30329a42272a3de373ab";
-const endpoint= "http://api.unsplash.com/search/photos";
-
-
-export  default class App extends Component {
-  constructor(){
-    super()
-    this.query= "";
-    this.trackQueryValue=this.trackQueryValue.bind(this);
-    this.search=this.search.bind(this);
-  
-    this.state={
-      images:[]
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      img: "",
+      modal: false,
+      page: 20
     }
-  }
-  
-  
-  search(){
-    fetch (`${endpoint}?query=${this.query}&client_id=${apiKey}`)
-    .then(response=>{
-      return response.json()
-    })
-    .then(jsonResponse=>{
-      this.setState({
-        images:jsonResponse.results
-      })
-    })
+    this.modalOpen = this.modalOpen.bind(this);
+    this.modalClose = this.modalClose.bind(this);
+}
 
+  modalOpen(i) {
+    this.setState({
+      ...this.state,
+      modal: i,
+    })
   }
 
-  trackQueryValue(ev){
-    this.query=ev.target.value;
-  }
-  
-  images(){
-    return this.state.images.map(image=>{
-      return <img src={image.urls.thumb}/>
+  modalClose() {
+    this.setState({
+      ...this.state,
+      modal: false,
     })
   }
-  render(){
-    return(
+
+  componentDidMount() {
+    fetch("https://api.unsplash.com/search/photos?page=1&per_page=20&query=dog&client_id=8540a06957bba7edb8ec581240178641a0fe9f10d8bd30329a42272a3de373ab")
+      .then(data => data.json())
+      .then(data => {
+        let arr = data.results;
+        this.setState({
+          ...this.state,
+          img: arr,
+        })
+      });
+     
+  }
+
+  fetchData = () => {
+  
+    let con = this.state.page + 20;
+    this.setState({
+      page: con
+    
+    })
+    console.log(con)
+    fetch("https://api.unsplash.com/search/photos?page="+(this.state.page/20)+"&per_page=20&query=dog&client_id=8540a06957bba7edb8ec581240178641a0fe9f10d8bd30329a42272a3de373ab")
+      .then(data => data.json())
+      .then(data => {
+        console.log(data)
+        let arr = data.results;
+        this.setState({
+          ...this.state,
+          img: arr.concat(this.state.img)
+        })
+         console.log(arr.concat(this.state.img))
+      });
+  }
+
+  show() {
+    const travel = this.state.img.map(element => {
+      return (
+        <Cards imgClick={this.modalOpen}
+          url={element.urls.thumb}
+          name={element.user.name} />
+
+      )
+    })
+    return travel
+  }
+
+  render() {
+    return (
       <div>
-          <input type="text" onChange={this.trackQueryValue}/>
-            <button onClick={this.search}>Buscar</button>
-            <div>
-              {this.images()}
-            </div>
+        <div>
+          <Navbar />
+        </div>
+        <div className="contenedr">
+          {this.state.modal && <Modal modalClose={this.modalClose}
+            viewImg={this.state.modal} />}
+          {this.state.img && this.show()}
+      </div>
+        <InfiniteScroll
+          dataLength={this.show.length}
+          next={this.fetchData}
+          hasMore={true}
+          >{this.show}
+        </InfiniteScroll>
       </div>
     );
   }
 }
+export default App;
+
+/*import './Components/Api.css';
+const apiKey= "8540a06957bba7edb8ec581240178641a0fe9f10d8bd30329a42272a3de373ab";
+const endpoint= "http://api.unsplash.com/search/photos";*/
+
+
 
   
 
