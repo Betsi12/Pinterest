@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import './navbar.css';
 
-class Navbar extends Component{
+const Navbar = () => {
+    return (
+        <div className="navbar">
+            <div className="imgLogo">
+            <i className='fab fa-pinterest'></i>
+            </div>
+            <div className="inputSearch">
+                <input type="text" placeholder="" />
+                <i className="material-icons">search</i>
+            </div>
+            <div className="buttons">
+                <a href='/inicio' className="btn" style={{color:'black'}}>Inicio</a> 
+                <a href='/siguiendo' className="btn">Siguiendo</a> 
+                <a href='/perfil' className="btn">Betsi<i className='fas fa-chevron-down' style={{fontSize:'14px'}}></i></a>            
+                <a href='/chat' className="btn" ><i className='fas fa-comment-dots'></i></a>
+                <a href='/notif' className="btn"><i className='fas fa-bell'></i></a>
+                
 
-    render() {
-      return (
-        <form onSubmit={this.bringdata}>
-          <div className="container-all">
-          <div id="medium">
-          <button id='content-icon'><i className='fab fa-pinterest'></i></button>
-          <div id='cap-input'>
-          <div id='all-input'>
-          <img id="lupa" src="/Images/buscador-lupa.png"></img>
-          <input id='buscar' ref={this.busquedaRef} type="search" placeholder="Buscar" ></input>
-          </div>
-          </div>
-          </div>
-          <div id="buttons" className="buttons">
-          <button id="inicio">Inicio</button>
-          <button id="siguiendo">Siguiendo</button>
-          <button id="id-name">IdName</button>
-          <button id="my-name">MyName</button>
-          <i id="comment" className='fas fa-comment-dots'></i>
-          <i id="bell" className='far fa-bell'></i>
-          <i id="points" className='fas fa-ellipsis-h'></i>
-          </div>
-          </div>
-          </form>
-      );
-    }
-  }
-  
-  export default Navbar;
+            </div>
+        </div>
+    )
+}
+
+export default Navbar;
