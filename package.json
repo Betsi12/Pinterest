@@ -7,7 +7,7 @@
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
     "react-infinite-scroll-component": "^4.5.2",
-    "unsplash-js": "^5.0.0"
+    "unsplash-js": "^7.0.20"
   },
   "scripts": {
     "start": "react-scripts start",
